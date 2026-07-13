@@ -1,17 +1,29 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public record Tags(List<Tag> values) {
+    public Tags {
+        values = List.copyOf(values);
+        if (values.size() > 5) {
+            throw new IllegalArgumentException("태그는 5개를 초과할 수 없습니다.");
+        }
+    }
+
     public Tags append(Tag tag) {
-        return this;
+        var values = new ArrayList<>(this.values);
+        values.add(tag);
+        return new Tags(values);
     }
 
     public Tags remove(Tag tag) {
-        return this;
+        var values = new ArrayList<>(this.values);
+        values.remove(tag);
+        return new Tags(values);
     }
 
     public Tags clear() {
-        return this;
+        return new Tags(List.of());
     }
 }
