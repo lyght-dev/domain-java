@@ -3,6 +3,10 @@ package domain;
 import java.util.Objects;
 
 public record Memo(String value) {
+    public static Memo empty() {
+        return new Memo("");
+    }
+
     public Memo {
         value = Objects.requireNonNull(value, "메모는 null일 수 없습니다.");
         value = printable(value);

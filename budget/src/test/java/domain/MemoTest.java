@@ -9,6 +9,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public final class MemoTest {
     @Test
+    void 빈_메모를_만들_수_있다() {
+        assertThat(Memo.empty().value()).isEmpty();
+    }
+
+    @Test
     void 메모는_100자까지_가질_수_있다() {
         assertThat(new Memo("가".repeat(100)).value()).hasSize(100);
     }

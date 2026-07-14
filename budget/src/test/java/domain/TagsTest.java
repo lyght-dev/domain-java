@@ -8,6 +8,17 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public final class TagsTest {
     @Test
+    void 빈_태그_목록을_만들_수_있다() {
+        assertThat(Tags.empty().values()).isEmpty();
+    }
+
+    @Test
+    void 문자열로_태그를_만들_수_있다() {
+        assertThat(Tags.of("1", "2", "3").values())
+                .containsExactly(new Tag("1"), new Tag("2"), new Tag("3"));
+    }
+
+    @Test
     void 태그는_5개까지_가질_수_있다() {
         var tags = new Tags(List.of(
                 new Tag("1"), new Tag("2"), new Tag("3"), new Tag("4"), new Tag("5")
