@@ -44,7 +44,9 @@ nbdist/
 
 *.tmp
 *.temp
+build/
 
 # Environment files
 .env
 .env.*
+previous-compilation-data.bin
