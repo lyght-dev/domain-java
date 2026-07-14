@@ -19,6 +19,11 @@ public final class TagsTest {
     }
 
     @Test
+    void 태그를_문자열_목록으로_변환할_수_있다() {
+        assertThat(Tags.of("1", "2").texts()).containsExactly("1", "2");
+    }
+
+    @Test
     void 태그는_5개까지_가질_수_있다() {
         var tags = new Tags(List.of(
                 new Tag("1"), new Tag("2"), new Tag("3"), new Tag("4"), new Tag("5")

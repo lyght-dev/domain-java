@@ -20,6 +20,10 @@ public record Tags(List<Tag> values) {
         return new Tags(Arrays.stream(values).map(Tag::new).toList());
     }
 
+    public List<String> texts() {
+        return values.stream().map(Tag::value).toList();
+    }
+
     public Tags append(Tag tag) {
         var values = new ArrayList<>(this.values);
         values.add(tag);

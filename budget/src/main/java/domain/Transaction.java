@@ -1,6 +1,8 @@
 package domain;
 
 import java.time.Instant;
+import java.util.List;
+import java.util.Objects;
 
 public final class Transaction {
     private final TransactionId id;
@@ -27,6 +29,28 @@ public final class Transaction {
         this.memo = memo;
         this.tags = tags;
         this.occurredAt = occurredAt;
+    }
+
+    public static Transaction of(
+            String id,
+            String type,
+            String categoryId,
+            long amount,
+            String memo,
+            List<String> tags,
+            Instant occurredAt
+    ) {
+        var memoValue = Objects.requireNonNullElse(memo, "");
+        var tagValues = Objects.requireNonNullElse(tags, List.of());
+        return new Transaction(
+                new TransactionId(id),
+                TransactionType.valueOf(type),
+                new CategoryId(categoryId),
+                new Won(amount),
+                memoValue.isEmpty() ? Memo.empty() : new Memo(memoValue),
+                tagValues.isEmpty() ? Tags.empty() : Tags.of(tagValues.toArray(String[]::new)),
+                Objects.requireNonNull(occurredAt, "거래 시각은 null일 수 없습니다.")
+        );
     }
 
     public TransactionId id() {
